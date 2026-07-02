@@ -1,13 +1,13 @@
-import { AboutSection } from "./components/about-section";
-import { ContactSection } from "./components/contact-section";
-import { ExperienceSection } from "./components/experience-section";
-import { HeroSection } from "./components/hero-section";
-import { Navbar } from "./components/navbar";
-import { ProjectsSection } from "./components/projects-section";
+import { AboutSection } from "./components/layout/about-section";
+import { ContactSection } from "./components/layout/contact-section";
+import { ExperienceSection } from "./components/layout/experience-section";
+import { HeroSection } from "./components/layout/hero-section";
+import { Navbar } from "./components/layout/navbar";
+import { ProjectsSection } from "./components/layout/projects-section";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#06373B] text-white">
+    <div className="min-h-screen bg-[#070511] text-white">
       <Navbar />
       <main>
         <HeroSection />
