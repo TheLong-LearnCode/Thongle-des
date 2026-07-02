@@ -36,7 +36,7 @@ export function Navbar() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    const sections = ["home", ...links.map((link) => link.href.replace("#", ""))]
+    const sections = ["home", ...links.map((link) => link.href.replace("#", "")), "contact"]
       .map((id) => document.getElementById(id))
       .filter((element): element is HTMLElement => element !== null);
 

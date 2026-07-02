@@ -33,7 +33,7 @@ const skills = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="border-b border-white/10 bg-[#070511]">
+    <section id="experience" className="bg-[#070511]">
       <div className="mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
         <div className="max-w-3xl">
           <p className="font-title text-sm font-semibold uppercase tracking-[0.3em] text-[#C084FC]">

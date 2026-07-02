@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #06373b;
+  --background: #070511;
   --foreground: #ffffff;
-  --card-bg: #061a23;
-  --accent: #4ab265;
+  --card-bg: #0E0A19;
+  --accent: #C084FC;
   --subtext: #f4f6f7;
 }
 
@@ -41,5 +41,32 @@ a {
 }
 
 ::selection {
-  background: rgba(15, 23, 42, 0.12);
+  background: rgba(168, 85, 247, 0.25);
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070511;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.35);
+  border: 2px solid #070511;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.6);
+}
+
+/* Firefox scrollbar compatibility */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.35) #070511;
 }
