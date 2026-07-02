@@ -41,7 +41,7 @@ export function ExperienceSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div className="grid gap-6">
             <article className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_18px_60px_rgba(168,85,247,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1 sm:p-7">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -65,15 +65,15 @@ export function ExperienceSection() {
                       {item.company}
                     </h3>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        {item.role.map((role) => (
-                          <span
-                            key={role}
-                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/75"
-                          >
-                            {role}
-                          </span>
-                        ))}
-                      </div>
+                      {item.role.map((role) => (
+                        <span
+                          key={role}
+                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/75"
+                        >
+                          {role}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -110,10 +110,10 @@ export function ExperienceSection() {
                     ) : (
                       <div className="mt-3 flex flex-wrap gap-2">
                         <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/75">
-                        {item.major}
-                      </span>
+                          {item.major}
+                        </span>
                       </div>
-                      
+
                     )}
                   </div>
                 ))}

@@ -141,7 +141,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           background: `radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.18), transparent 80%)`,
         }}
       />
-      
+
       {/* Project Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <Image
@@ -175,7 +175,7 @@ export function ProjectsSection() {
     <section id="project" className="relative bg-linear-to-b from-[#070511] via-[#0E0A19] to-[#070511] overflow-hidden">
       {/* Ambient background accent light (Purple) */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(168,85,247,0.08),transparent_50%)]" />
-      
+
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
         <SectionHeading
           eyebrow="Project"
