@@ -1,3 +1,11 @@
+"use client";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const experience = [
   {
     period: "02/2025 - 10/2025",
@@ -32,6 +40,32 @@ const skills = [
 ];
 
 export function ExperienceSection() {
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = gsap.utils.toArray<HTMLElement>("article", grid);
+
+    const ctx = gsap.context(() => {
+      gsap.set(cards, { opacity: 0, y: 40 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: grid,
+            start: "top 85%",
+            once: true,
+          },
+          defaults: { ease: "power3.out", duration: 0.9 },
+        })
+        .to(cards, { opacity: 1, y: 0, stagger: 0.15 });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="experience" className="bg-[#070511]">
       <div className="mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
@@ -41,7 +75,10 @@ export function ExperienceSection() {
           </p>
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+        <div
+          ref={gridRef}
+          className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start"
+        >
           <div className="grid gap-6">
             <article className="group rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_18px_60px_rgba(168,85,247,0.08)] backdrop-blur transition-transform duration-300 hover:-translate-y-1 sm:p-7">
               <div className="flex flex-wrap items-center justify-between gap-3">

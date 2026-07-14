@@ -3,7 +3,10 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionHeading } from "./section-heading";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -171,18 +174,52 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export function ProjectsSection() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const headingWrapperRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const headingWrapper = headingWrapperRef.current;
+    const cards = cardsRef.current;
+
+    if (!container || !headingWrapper || !cards) return;
+
+    const cardElements = gsap.utils.toArray<HTMLAnchorElement>("a", cards);
+
+    const ctx = gsap.context(() => {
+      gsap.set([headingWrapper, ...cardElements], { opacity: 0, y: 40 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: "top 85%",
+            once: true,
+          },
+          defaults: { ease: "power3.out", duration: 0.9 },
+        })
+        .to(headingWrapper, { opacity: 1, y: 0 })
+        .to(cardElements, { opacity: 1, y: 0, stagger: 0.12 }, "-=0.55");
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="project" className="relative bg-linear-to-b from-[#070511] via-[#0E0A19] to-[#070511] overflow-hidden">
       {/* Ambient background accent light (Purple) */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(168,85,247,0.08),transparent_50%)]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
-        <SectionHeading
-          eyebrow="Project"
-          title="Here are some of the projects I've worked on throughout my studies and internship experience."
-        />
+      <div ref={containerRef} className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <div ref={headingWrapperRef}>
+          <SectionHeading
+            eyebrow="Project"
+            title="Here are some of the projects I've worked on throughout my studies and internship experience."
+          />
+        </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div ref={cardsRef} className="mt-12 grid gap-6 lg:grid-cols-3">
           {projects.map((project, index) => (
             <ProjectCard key={project.name} project={project} index={index} />
           ))}

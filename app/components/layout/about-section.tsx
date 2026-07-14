@@ -1,12 +1,45 @@
 
 "use client";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function AboutSection() {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const heading = headingRef.current;
+    const content = contentRef.current;
+
+    if (!heading || !content) return;
+
+    const paragraphs = gsap.utils.toArray<HTMLParagraphElement>("p", content);
+
+    const ctx = gsap.context(() => {
+      gsap.set([heading, ...paragraphs], { opacity: 0, y: 40 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            once: true,
+          },
+          defaults: { ease: "power3.out", duration: 0.9 },
+        })
+        .to(heading, { opacity: 1, y: 0 })
+        .to(paragraphs, { opacity: 1, y: 0, stagger: 0.12 }, "-=0.55");
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -52,11 +85,17 @@ export function AboutSection() {
             About me
           </p>
 
-          <h2 className="mt-4 font-title text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h2
+            ref={headingRef}
+            className="mt-4 font-title text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl"
+          >
             Hi, I&apos;m <span className="text-[#E9D5FF]">Thong Le</span>
           </h2>
 
-          <div className="mx-auto mt-7 max-w-xl space-y-5 font-body text-sm leading-7 text-white/80 sm:text-base sm:leading-8 lg:mx-0 lg:mt-8 lg:text-lg">
+          <div
+            ref={contentRef}
+            className="mx-auto mt-7 max-w-xl space-y-5 font-body text-sm leading-7 text-white/80 sm:text-base sm:leading-8 lg:mx-0 lg:mt-8 lg:text-lg"
+          >
             <p>
               I&apos;m a <span className="text-[#C084FC] font-bold">UI/UX Designer</span> with a background in Front-end Development. I believe both fields share the same goal: creating intuitive, visually appealing, and meaningful user experiences.
             </p>
